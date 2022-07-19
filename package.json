@@ -1,0 +1,23 @@
+{
+  "name": "meet-conf",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon  v1/src/app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "crypto-js": "^4.1.1",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "gitignore": "^0.7.0",
+    "helmet": "^5.1.0",
+    "http-status": "^1.5.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.4.4",
+    "mongoose-autopopulate": "^0.16.1",
+    "nodemon": "^2.0.19"
+  }
+}
