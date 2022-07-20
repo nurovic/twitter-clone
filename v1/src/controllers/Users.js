@@ -5,7 +5,7 @@ const {
   generateRefreshToken,
 } = require("../utils/helper");
 const UserService = require("../services/Users");
-
+const TweetService = require ("../services/Tweet");
 class User {
   profile(req, res){
     UserService
@@ -94,12 +94,25 @@ class User {
             })
             .catch((e) => res.status(httpStatus.INTERNAL_SERVER_ERROR).send(e))
 }
+retweet(req, res) {
+      TweetService.create({author: req.user._id, originalTweet:req.params.id, ...req.body})
+      .then((response) => {
+        res.status(httpStatus.CREATED).send(response);
+        UserService.update({_id: req.user._id }, {$push: {retweets:req.params.id}}).then()
+      })
+      .catch((e) => {
+        res
+          .status(httpStatus.INTERNAL_SERVER_ERROR)
+          .send({ message: "Error occurred while creating user" });
+      });
+}
 
-
-
-
-
-
-
+getretweets(req, res){
+  UserService
+  .findOne({_id: req.user._id})
+  .then((response) => {
+    console.log()
+      res.status(httpStatus.CREATED).send(response.retweets)
+  }).catch((e) => res.status(httpStatus.INTERNAL_SERVER_ERROR).send({message:e}))}
 }
 module.exports = new User();

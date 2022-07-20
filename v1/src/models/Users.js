@@ -13,6 +13,13 @@ const UserSchema = new Mongoose.Schema(
         ref: 'tweet',
       }
     ],
+    retweets: [
+      {
+        type: Mongoose.Schema.Types.ObjectId,
+        ref: 'tweet',
+        autopopulate: { maxDepth: 2 },
+      }
+    ],
     followers: [],
     following: []
   },
