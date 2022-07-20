@@ -7,7 +7,6 @@ router.route("/").get(UserController.index)
 router.route("/:id").get(UserController.findOne)
 router.route("/:me").get(UserController.profile)
 router.route("/").post(UserController.create)
-router.route("/:course/buy-course").post(authenticate, UserController.checkout)
 
 router.route("/profile/:id").get(authenticate, UserController.profile)
 

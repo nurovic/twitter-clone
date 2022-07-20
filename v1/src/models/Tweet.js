@@ -6,7 +6,7 @@ const TweetSchema = new Mongoose.Schema(
     {
         type: Mongoose.Schema.Types.ObjectId,
         ref: 'user',
-        autopopulate: { maxDepth: 2, select: "full_name" }
+        autopopulate: { maxDepth: 2, select: "full_name _id"}
     },
     tweet: String,
     likes:[
@@ -43,4 +43,4 @@ const TweetSchema = new Mongoose.Schema(
 );
 
 TweetSchema.plugin(require("mongoose-autopopulate"));
-module.exports = Mongoose.model("tweet", TweetSchema);
+module.exports = Mongoose.model('tweet', TweetSchema);
