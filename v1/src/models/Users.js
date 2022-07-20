@@ -11,8 +11,6 @@ const UserSchema = new Mongoose.Schema(
       {
         type: Mongoose.Schema.Types.ObjectId,
         ref: 'tweet',
-        autopopulate: { maxDepth: 2 }
-
       }
     ],
     followers: [],
