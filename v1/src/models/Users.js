@@ -7,11 +7,16 @@ const UserSchema = new Mongoose.Schema(
     password: String,
     email: String,
     profil_picture: String,
-    tweets: [],
-    replies: [],
+    tweets: [
+      {
+        type: Mongoose.Schema.Types.ObjectId,
+        ref: 'tweet',
+        autopopulate: { maxDepth: 2 }
+
+      }
+    ],
     followers: [],
-    following: [],
-    likes: []
+    following: []
   },
   { timestamps: true, versionKey: false }
 );
