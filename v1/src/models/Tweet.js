@@ -6,7 +6,7 @@ const TweetSchema = new Mongoose.Schema(
     {
         type: Mongoose.Schema.Types.ObjectId,
         ref: 'user',
-        autopopulate: { maxDepth: 2, select: "full_name _id"}
+        autopopulate: { maxDepth: 1, select: "_id full_name"}
     },
     tweet: String,
     likes:[
@@ -32,12 +32,7 @@ const TweetSchema = new Mongoose.Schema(
         ref: 'tweet',
         autopopulate: { maxDepth: 2 },
       },
-    retweets: [
-        {
-          type: Mongoose.Schema.Types.ObjectId,
-          ref: 'tweet',
-        },
-      ],
+
   },
   { timestamps: true, versionKey: false }
 );

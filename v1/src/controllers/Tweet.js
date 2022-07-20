@@ -3,7 +3,7 @@ const TweetService = require("../services/Tweet");
 
 class Tweet {
   create(req, res) {
-      // console.log(req.user)
+
     TweetService.create({author: req.user._id, ...req.body})
       .then((response) => {
         res.status(httpStatus.CREATED).send(response);
@@ -15,9 +15,8 @@ class Tweet {
       });
   }
 
-
   index(req, res) {
-    UserService.list()
+    TweetService.list()
       .then((response) => {
         res.status(httpStatus.OK).send(response);
       })
