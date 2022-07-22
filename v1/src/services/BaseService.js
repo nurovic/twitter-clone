@@ -35,7 +35,9 @@ class BaseService {
     updateWhere(where, data) {
         return this.model.findOneAndUpdate(where, data, {new: true})
     }
-    
+    deleteMany(id) {
+        return this.model.deleteMany(id)
+    }
     delete(id){
         return this.model.findByIdAndDelete(id)
     }
