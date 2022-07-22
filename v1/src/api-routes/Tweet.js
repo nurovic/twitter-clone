@@ -5,6 +5,7 @@ const router = express.Router()
 
 router.route("/").get(TweetController.index)
 router.route("/:id").get(TweetController.findOne)
+router.route("/:id").delete(authenticate, TweetController.deleteTweet)
 router.route("/").post(authenticate, TweetController.create)
 
 
