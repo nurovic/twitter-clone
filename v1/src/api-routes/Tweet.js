@@ -2,10 +2,11 @@ const authenticate = require("../middlewares/authenticate")
 const express = require("express") 
 const TweetController = require("../controllers/Tweet")
 const router = express.Router()
+const deleteCheck = require("../utils/deleteCheck")
 
 router.route("/").get(TweetController.index)
 router.route("/:id").get(TweetController.findOne)
-router.route("/:id").delete(authenticate, TweetController.deleteTweet)
+router.route("/:id").delete(authenticate, deleteCheck, TweetController.deleteTweet)
 router.route("/").post(authenticate, TweetController.create)
 
 
