@@ -12,6 +12,9 @@ router.route("/login").post(UserController.login)
 
 router.route("/:id/retweet").post(authenticate, UserController.retweet)
 router.route("/:me/retweets").get(authenticate, UserController.getretweets)
+router.route("/:id/following").get(UserController.getFollowing)
+router.route("/:id/followers").get( UserController.getFollowers)
 
+router.route("/:id/follow").post(authenticate, UserController.followUser)
 
 module.exports = router
