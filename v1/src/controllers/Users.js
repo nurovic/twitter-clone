@@ -73,22 +73,19 @@ class User {
       .catch((e) => res.status(httpStatus.INTERNAL_SERVER_ERROR).send(e));
   }
   findOne(req, res) {
-    if(!req.params?.id){
-        return res.status(httpStatus.BAD_REQUEST).send({
-            message:"ID information is missing for Update"
-        })
-    }
     UserService
-        .findOne({_id: req.params.id})
+        .findOne({nick_name: req.params.nickname})
             .then((user) => {
                 return res.status(httpStatus.OK).send(
                   {
                     _id: user._id,
                     full_name: user.full_name,
-                    profession: user.profession,
-                    profile_image: user.profile_image,
-                    about: user.about,
-                    created_courses: user.created_courses
+                    nick_name: user.nick_name,
+                    email: user.email,
+                    tweets: user.tweets,
+                    following: user.following,
+                    followers: user.followers,
+                    retweets: user.retweets
                   }
                 )
             })
