@@ -116,7 +116,6 @@ class User {
   getFollowing(req, res ){
   UserService
   .findOne({_id: req.params.id})
-  .populate("full_name")
   .then((response) => {
       res.status(httpStatus.CREATED).send(response.following)
   }).catch((e) => res.status(httpStatus.INTERNAL_SERVER_ERROR).send({message:e}))
@@ -128,7 +127,7 @@ class User {
     res.status(httpStatus.CREATED).send(response.followers)
   }).catch((e) => res.status(httpStatus.INTERNAL_SERVER_ERROR).send({message:e}))
   }
-   async followUser(req, res, next) {
+  async followUser(req, res, next) {
     await UserService.update({_id: req.user._id }, {$push: {following:req.params.id}})
     await UserService.update({_id: req.params.id }, {$push: {followers:req.user._id}})
     next()
