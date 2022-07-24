@@ -5,7 +5,7 @@ const mailCheck = require('../utils/mailCheck')
 const router = express.Router()
 
 router.route("/").get(UserController.index)
-router.route("/:id").get(UserController.findOne)
+router.route("/:nickname").get(UserController.findOne)
 router.route("/:me").get(UserController.profile)
 router.route("/").post(mailCheck, UserController.create)
 router.route("/profile/:id").get(authenticate, UserController.profile)
