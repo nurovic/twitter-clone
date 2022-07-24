@@ -29,7 +29,6 @@ const UserSchema = new Mongoose.Schema(
       {
         type: Mongoose.Schema.Types.ObjectId,
         ref: 'user',
-        autopopulate:{max:1}
       }
     ]
   },
