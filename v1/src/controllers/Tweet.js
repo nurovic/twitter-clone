@@ -58,5 +58,19 @@ class Tweet {
                 .catch(e => res.status(INTERNAL_SERVER_ERROR).send({ error: "Error occured while comment" }))
         })
   }
+  deleteComment(req, res) {
+    TweetService
+        .findOne({ _id: req.params.id })
+        .then(tweetTask => {
+            if(!tweetTask) return res.status(httpStatus.NOT_FOUND).send({message: "This comment not found"})
+            tweetTask.comments = tweetTask.comments.filter((d) => { return d._id.toString() != req.params.commentID })
+            tweetTask
+                .save()
+                .then((update) => {
+                    return res.status(httpStatus.OK).send(update)
+                })
+                .catch(e => res.status(httpStatus.INTERNAL_SERVER_ERROR).send({ message: "comment deleted" }))
+        })
+}
 }
 module.exports = new Tweet();
