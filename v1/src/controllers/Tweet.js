@@ -40,6 +40,37 @@ class Tweet {
             res.status(httpStatus.OK).send({ message: "Tweet Deleted" })
         }).catch(e => res.status(httpStatus.INTERNAL_SERVER_ERROR).send({ message: "Error occured while delete tweet" }))
 
+  }
+  makeComment(req, res) {
+    TweetService
+        .findOne({ _id: req.params.id })
+        .then(tweetTask => {
+            const comment = {
+                ...req.body,
+                commented_at: new Date(),
+                user_id: req.user.id
+            }
+            tweetTask.comments.push(comment)
+            tweetTask.save()
+                .then((commented) => {
+                    return res.status(httpStatus.OK).send(commented)
+                })
+                .catch(e => res.status(INTERNAL_SERVER_ERROR).send({ error: "Error occured while comment" }))
+        })
+  }
+  deleteComment(req, res) {
+    TweetService
+        .findOne({ _id: req.params.id })
+        .then(tweetTask => {
+            if(!tweetTask) return res.status(httpStatus.NOT_FOUND).send({message: "This comment not found"})
+            tweetTask.comments = tweetTask.comments.filter((d) => { return d._id.toString() != req.params.commentID })
+            tweetTask
+                .save()
+                .then((update) => {
+                    return res.status(httpStatus.OK).send(update)
+                })
+                .catch(e => res.status(httpStatus.INTERNAL_SERVER_ERROR).send({ message: "comment deleted" }))
+        })
 }
 }
 module.exports = new Tweet();

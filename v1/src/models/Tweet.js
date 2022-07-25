@@ -23,7 +23,7 @@ const TweetSchema = new Mongoose.Schema(
             user_id: {
                 type: Mongoose.Schema.Types.ObjectId,
                 ref: 'user',
-                autopopulate: { maxDepth: 2, select: "full_name  profile_picture" }
+                autopopulate: { maxDepth: 2, select: "full_name  profile_picture nick_name" }
             },
         }
     ],
