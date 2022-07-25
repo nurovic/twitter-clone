@@ -40,6 +40,23 @@ class Tweet {
             res.status(httpStatus.OK).send({ message: "Tweet Deleted" })
         }).catch(e => res.status(httpStatus.INTERNAL_SERVER_ERROR).send({ message: "Error occured while delete tweet" }))
 
-}
+  }
+  makeComment(req, res) {
+    TweetService
+        .findOne({ _id: req.params.id })
+        .then(tweetTask => {
+            const comment = {
+                ...req.body,
+                commented_at: new Date(),
+                user_id: req.user.id
+            }
+            tweetTask.comments.push(comment)
+            tweetTask.save()
+                .then((commented) => {
+                    return res.status(httpStatus.OK).send(commented)
+                })
+                .catch(e => res.status(INTERNAL_SERVER_ERROR).send({ error: "Error occured while comment" }))
+        })
+  }
 }
 module.exports = new Tweet();
