@@ -23,12 +23,14 @@ const UserSchema = new Mongoose.Schema(
       {
         type: Mongoose.Schema.Types.ObjectId,
         ref: 'user',
+        autopopulate: { maxDepth: 2, select: "full_name  profile_picture nick_name" }
       }
     ],
     following: [
       {
         type: Mongoose.Schema.Types.ObjectId,
         ref: 'user',
+        autopopulate: { maxDepth: 2, select: "full_name  profile_picture nick_name" }
       }
     ]
   },
