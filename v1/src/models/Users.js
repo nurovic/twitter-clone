@@ -32,6 +32,12 @@ const UserSchema = new Mongoose.Schema(
         ref: 'user',
         autopopulate: { maxDepth: 2, select: "full_name  profile_picture nick_name" }
       }
+    ],
+    likedTweets: [
+      {
+        type: Mongoose.Schema.Types.ObjectId,
+        ref: 'tweet',
+      }
     ]
   },
   { timestamps: true, versionKey: false }
