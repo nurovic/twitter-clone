@@ -1,6 +1,6 @@
 const httpStatus = require("http-status");
 const TweetService = require("../services/Tweet");
-
+const UserService = require("../services/Users")
 class Tweet {
   create(req, res) {
     TweetService.create({author: req.user._id, ...req.body})
@@ -71,6 +71,14 @@ class Tweet {
                 })
                 .catch(e => res.status(httpStatus.INTERNAL_SERVER_ERROR).send({ message: "comment deleted" }))
         })
-}
+  }
+  async likeTweet(req, res) {
+    await TweetService.update({_id: req.params.id }, {$push: {likes: req.user._id }}).then()
+    await UserService.update({_id: req.user._id }, {$push: {likedTweets:req.params.id}}).then()   
+  }
+  async disLikeTweet(req, res) {
+    await TweetService.update({_id: req.params.id }, {$pull: {likes: req.user._id }}).then()
+    await UserService.update({_id: req.user._id }, {$pull: {likedTweets:req.params.id}}).then()   
+  }
 }
 module.exports = new Tweet();

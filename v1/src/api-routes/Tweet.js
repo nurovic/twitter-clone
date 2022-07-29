@@ -11,6 +11,8 @@ router.route("/:id").delete(authenticate, deleteCheck, TweetController.deleteTwe
 router.route("/").post(authenticate, TweetController.create)
 router.route("/:id/comment").post(authenticate, TweetController.makeComment)
 router.route("/:id/:commentID").delete(authenticate, deleteCommentCheck, TweetController.deleteComment)
+router.route("/:id/like").post(authenticate, TweetController.likeTweet)
+router.route("/:id/dislike").post(authenticate, TweetController.disLikeTweet)
 
 
 
