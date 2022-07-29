@@ -13,7 +13,7 @@ const TweetSchema = new Mongoose.Schema(
         {
           type: Mongoose.Schema.Types.ObjectId,
           ref: 'user',
-          autopopulate: { select: 'nick_name' },
+          autopopulate: {max:2,  select: 'nick_name' },
         },
       ],
     comments: [
